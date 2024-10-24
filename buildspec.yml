@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo process started at `date`
+      - REPOSITORY_URI=590184040325.dkr.ecr.us-east-1.amazonaws.com/vitormsp/show-ip
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $REPOSITORY_URI
+  build:
+    commands:
+      - echo building docker image
+      - docker build -t $REPOSITORY_URI:latest .
+    finally:
+      - echo build finished at `date`
+  
+  post_build:
+    commands:
+      - echo pushing $REPOSITORY_URI:latest to ECR
+      - docker push $REPOSITORY_URI:latest
+    finally:
+      - echo push finished at `date`
