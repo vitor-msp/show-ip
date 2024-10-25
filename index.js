@@ -30,9 +30,9 @@ const api = express();
 api.get("/", (req, res) => {
   randomCalculationToConsumeCPU();
   const responseBody = `
-    <strong>source ip</strong><span>${getRemoteIp(req)}</span>
+    <strong>SOURCE IP</strong><span>${getRemoteIp(req)}</span>
     <br>
-    <strong>server ip</strong><span>${ip.address()}</span>
+    <strong>SERVER IP</strong><span>${ip.address()}</span>
   `;
   res.send(responseBody);
 });
