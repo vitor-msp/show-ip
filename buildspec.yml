@@ -17,5 +17,9 @@ phases:
     commands:
       - echo pushing $REPOSITORY_URI:latest to ECR
       - docker push $REPOSITORY_URI:latest
+      - printf '[{"name":"show-ip","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json 
     finally:
       - echo push finished at `date`
+
+artifacts:
+  files: imagedefinitions.json
